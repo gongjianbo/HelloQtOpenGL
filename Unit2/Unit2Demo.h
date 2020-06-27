@@ -7,6 +7,7 @@ namespace Ui {
 class Unit2Demo;
 }
 
+//第二单元Demo展示
 class Unit2Demo : public QWidget
 {
     Q_OBJECT
