@@ -3,6 +3,7 @@
 
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions_4_0_Compatibility>
+#include <QTimer>
 
 //绘制三角（使用固定管线）
 //Compatibility是为了支持固定管线API
@@ -21,6 +22,13 @@ protected:
     //设置OpenGL视口、投影等，每当尺寸大小改变时调用
     void resizeGL(int width, int height) override;
 
+private:
+    //定时器，用于颜色渐变
+    QTimer *timer=new QTimer(this);
+    //颜色偏移值
+    int offsetCount=0;
+    //累加或减
+    bool offsetFlag=false;
 };
 
 #endif // UNIT2TRIANGLE_H
