@@ -1,5 +1,9 @@
 #include "Unit2Triangle.h"
 
+#include <QSurfaceFormat>
+#include <QOpenGLContext>
+#include <QDebug>
+
 Unit2Triangle::Unit2Triangle(QWidget *parent)
     : QOpenGLWidget(parent)
 {
@@ -40,6 +44,19 @@ void Unit2Triangle::initializeGL()
 {
     //此为Qt接口:为当前上下文初始化OpenGL函数解析
     initializeOpenGLFunctions();
+
+    //打印OpenGL信息，使用gl函数，应该是获取的系统的
+    //使用了QSurfaceFormat设置gl后就不能调用这个了
+    //const GLubyte * vendor = glGetString(GL_VENDOR);
+    //const GLubyte * renderer = glGetString(GL_RENDERER);
+    //const GLubyte * version = glGetString(GL_VERSION);
+    //qDebug()<<"OpenGL实现厂商"<<(char*)vendor;
+    //qDebug()<<"渲染器标识符"<<(char*)renderer;
+    //qDebug()<<"OpenGL版本号"<<(char*)version;
+
+    //QSurfaceFormat默认版本为2.0=QSurfaceFormat::defaultFormat().version()
+    qDebug()<<"QSurfaceFormat::defaultFormat()"<<QSurfaceFormat::defaultFormat();
+
     //窗口清除的颜色
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
