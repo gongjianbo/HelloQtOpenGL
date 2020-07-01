@@ -23,8 +23,12 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
-include($$PWD/Unit2/Unit2.pri)
+
 INCLUDEPATH += $$PWD/Unit2
+INCLUDEPATH += $$PWD/Unit3
+include($$PWD/Unit2/Unit2.pri)
+include($$PWD/Unit3/Unit3.pri)
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
