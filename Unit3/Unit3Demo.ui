@@ -36,17 +36,17 @@
      </property>
      <widget class="QWidget" name="tab_1">
       <attribute name="title">
-       <string>Tab 1</string>
+       <string>基本图元</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QOpenGLWidget" name="openGLWidget"/>
+        <widget class="Unit3Primitives" name="trimitivesWidget"/>
        </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
-       <string>Tab 2</string>
+       <string>Tab 2 </string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
@@ -58,6 +58,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Unit3Primitives</class>
+   <extends>QOpenGLWidget</extends>
+   <header>Unit3Primitives.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -6,6 +6,8 @@ Unit3Demo::Unit3Demo(QWidget *parent) :
     ui(new Ui::Unit3Demo)
 {
     ui->setupUi(this);
+
+    ui->tabWidget->setCurrentIndex(0);
 }
 
 Unit3Demo::~Unit3Demo()
