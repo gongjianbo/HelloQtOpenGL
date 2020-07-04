@@ -32,7 +32,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_1">
       <attribute name="title">
@@ -46,11 +46,11 @@
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
-       <string>Tab 2 </string>
+       <string>面剔除</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QOpenGLWidget" name="openGLWidget_2"/>
+        <widget class="Unit3CullFace" name="cullfaceWidget"/>
        </item>
       </layout>
      </widget>
@@ -63,6 +63,11 @@
    <class>Unit3Primitives</class>
    <extends>QOpenGLWidget</extends>
    <header>Unit3Primitives.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Unit3CullFace</class>
+   <extends>QOpenGLWidget</extends>
+   <header>Unit3CullFace.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
