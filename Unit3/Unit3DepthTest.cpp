@@ -1,4 +1,4 @@
-#include "Unit3CullFace.h"
+#include "Unit3DepthTest.h"
 
 #include <QPainter>
 #include <QVector3D>
@@ -6,14 +6,14 @@
 #include <QKeyEvent>
 #include <QDebug>
 
-Unit3CullFace::Unit3CullFace(QWidget *parent)
+Unit3DepthTest::Unit3DepthTest(QWidget *parent)
     : QOpenGLWidget(parent)
 {
     //默认没得焦点，没法接收按键
     setFocusPolicy(Qt::StrongFocus);
 }
 
-Unit3CullFace::~Unit3CullFace()
+Unit3DepthTest::~Unit3DepthTest()
 {
     //此为Qt接口:通过使相应的上下文成为当前上下文并在该上下文中绑定帧缓冲区对象，
     //准备为此小部件呈现OpenGL内容。在调用paintGL()之前会自动调用。
@@ -26,7 +26,7 @@ Unit3CullFace::~Unit3CullFace()
     doneCurrent();
 }
 
-void Unit3CullFace::initializeGL()
+void Unit3DepthTest::initializeGL()
 {
     //此为Qt接口:为当前上下文初始化OpenGL函数解析
     initializeOpenGLFunctions();
@@ -35,10 +35,19 @@ void Unit3CullFace::initializeGL()
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
-void Unit3CullFace::paintGL()
+void Unit3DepthTest::paintGL()
 {
-    //清除颜色缓冲区
-    glClear(GL_COLOR_BUFFER_BIT);
+    //清除颜色缓冲区和深度缓冲区
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+
+    //设置面剔除模式，可以是BACK、FRONT、FRONT_AND_BACK
+    //glCullFace(GL_BACK); //剔除背面
+    //设置表面顺序
+    //glFrontFace(GL_CW);//默认CCW逆时针，这里使用CW顺时针
+    //开始面剔除，因为表面是纯色的，所以就不剔除了
+    //glEnable(GL_CULL_FACE);
+
+    glEnable(GL_DEPTH_TEST);//开启深度测试
 
     //放到resize里去了
     //当前矩阵位投影矩阵
@@ -92,12 +101,6 @@ void Unit3CullFace::paintGL()
 
     //框线模式来描边
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    //设置面剔除模式，可以是BACK、FRONT、FRONT_AND_BACK
-    glCullFace(GL_BACK); //剔除背面
-    //设置表面顺序
-    glFrontFace(GL_CW);//默认CCW逆时针，这里使用CW顺时针
-    //开始面剔除，因为表面是纯色的，所以就不剔除了
-    glEnable(GL_CULL_FACE);
     //绘制
     glBegin(GL_TRIANGLES);
     glColor3f(1.0f,1.0f,1.0f);
@@ -109,7 +112,6 @@ void Unit3CullFace::paintGL()
     glEnd();
     //恢复设置
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    glDisable(GL_CULL_FACE);
 
     //绘制文本
     QPainter painter(this);
@@ -117,7 +119,7 @@ void Unit3CullFace::paintGL()
     painter.drawText(20,40,"点击获取焦点后，按方向键旋转！");
 }
 
-void Unit3CullFace::resizeGL(int width, int height)
+void Unit3DepthTest::resizeGL(int width, int height)
 {
     //视口，靠左下角缩放
     glViewport(0,0,width,height);
@@ -126,11 +128,12 @@ void Unit3CullFace::resizeGL(int width, int height)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity(); //单位矩阵
     //设置为正交投影
+    //貌似开了深度测试，没设置投影的话，显示有点问题，面剔除就是正常的
     //glOrtho(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble near, GLdouble far)
     glOrtho(-1.0,1.0,-1.0,1.0,-1.0,1.0); //near和far取反
 }
 
-void Unit3CullFace::keyPressEvent(QKeyEvent *event)
+void Unit3DepthTest::keyPressEvent(QKeyEvent *event)
 {
     //左右转围绕的是y轴，上下转围绕的是x轴
     switch (event->key()) {
@@ -153,7 +156,7 @@ void Unit3CullFace::keyPressEvent(QKeyEvent *event)
     QOpenGLWidget::keyPressEvent(event);
 }
 
-void Unit3CullFace::showEvent(QShowEvent *event)
+void Unit3DepthTest::showEvent(QShowEvent *event)
 {
     setFocus();
     QOpenGLWidget::showEvent(event);

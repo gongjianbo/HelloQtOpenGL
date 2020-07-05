@@ -22,11 +22,13 @@ protected:
 
     //按键事件
     void keyPressEvent(QKeyEvent *event) override;
+    //设置切换显示的时候获取焦点
+    void showEvent(QShowEvent *event) override;
 
 private:
     //旋转角度
-    GLfloat xRotate=0;
-    GLfloat yRotate=0;
+    GLfloat xRotate=5;
+    GLfloat yRotate=40;
 };
 
 #endif // UNIT3CULLFACE_H

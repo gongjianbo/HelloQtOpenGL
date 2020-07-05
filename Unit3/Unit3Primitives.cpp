@@ -101,6 +101,12 @@ void Unit3Primitives::keyPressEvent(QKeyEvent *event)
     QOpenGLWidget::keyPressEvent(event);
 }
 
+void Unit3Primitives::showEvent(QShowEvent *event)
+{
+    setFocus();
+    QOpenGLWidget::showEvent(event);
+}
+
 void Unit3Primitives::drawPoints()
 {
     //点大小

@@ -22,6 +22,8 @@ protected:
 
     //按键事件
     void keyPressEvent(QKeyEvent *event) override;
+    //设置切换显示的时候获取焦点
+    void showEvent(QShowEvent *event) override;
 
 private:
     //测试几种图元模式，Qt中有十种枚举，教程中只列了7中
