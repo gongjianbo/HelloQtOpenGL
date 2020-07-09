@@ -98,7 +98,7 @@ void Unit3CullFace::paintGL()
     glFrontFace(GL_CW);//默认CCW逆时针，这里使用CW顺时针
     //开始面剔除，因为表面是纯色的，所以就不剔除了
     glEnable(GL_CULL_FACE);
-    //绘制
+    //绘制（用的面剔除，所以画框线也用三角没用线）
     glBegin(GL_TRIANGLES);
     glColor3f(1.0f,1.0f,1.0f);
     for(int index:element)

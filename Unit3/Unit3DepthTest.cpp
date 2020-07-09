@@ -101,8 +101,8 @@ void Unit3DepthTest::paintGL()
 
     //框线模式来描边
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    //绘制
-    glBegin(GL_TRIANGLES);
+    //绘制线
+    glBegin(GL_LINES);
     glColor3f(1.0f,1.0f,1.0f);
     for(int index:element)
     {
