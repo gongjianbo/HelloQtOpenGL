@@ -2,6 +2,7 @@ FORMS += \
     $$PWD/Unit3Demo.ui
 
 HEADERS += \
+    $$PWD/Unit3Blending.h \
     $$PWD/Unit3CullFace.h \
     $$PWD/Unit3Demo.h \
     $$PWD/Unit3DepthTest.h \
@@ -10,6 +11,7 @@ HEADERS += \
     $$PWD/Unit3ScissorTest.h
 
 SOURCES += \
+    $$PWD/Unit3Blending.cpp \
     $$PWD/Unit3CullFace.cpp \
     $$PWD/Unit3Demo.cpp \
     $$PWD/Unit3DepthTest.cpp \
