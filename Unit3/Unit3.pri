@@ -8,7 +8,8 @@ HEADERS += \
     $$PWD/Unit3DepthTest.h \
     $$PWD/Unit3PolygonOffset.h \
     $$PWD/Unit3Primitives.h \
-    $$PWD/Unit3ScissorTest.h
+    $$PWD/Unit3ScissorTest.h \
+    $$PWD/Unit3Smooth.h
 
 SOURCES += \
     $$PWD/Unit3Blending.cpp \
@@ -17,4 +18,5 @@ SOURCES += \
     $$PWD/Unit3DepthTest.cpp \
     $$PWD/Unit3PolygonOffset.cpp \
     $$PWD/Unit3Primitives.cpp \
-    $$PWD/Unit3ScissorTest.cpp
+    $$PWD/Unit3ScissorTest.cpp \
+    $$PWD/Unit3Smooth.cpp
