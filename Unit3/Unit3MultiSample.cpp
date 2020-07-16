@@ -1,4 +1,4 @@
-#include "Unit3Smooth.h"
+#include "Unit3MultiSample.h"
 
 #include <QKeyEvent>
 #include <QPainter>
@@ -6,14 +6,14 @@
 #include <QtMath>
 #include <QDebug>
 
-Unit3Smooth::Unit3Smooth(QWidget *parent)
+Unit3MultiSample::Unit3MultiSample(QWidget *parent)
     : QOpenGLWidget(parent)
 {
     //默认没得焦点，没法接收按键
     setFocusPolicy(Qt::StrongFocus);
 }
 
-Unit3Smooth::~Unit3Smooth()
+Unit3MultiSample::~Unit3MultiSample()
 {
     //此为Qt接口:通过使相应的上下文成为当前上下文并在该上下文中绑定帧缓冲区对象，
     //准备为此小部件呈现OpenGL内容。在调用paintGL()之前会自动调用。
@@ -26,40 +26,37 @@ Unit3Smooth::~Unit3Smooth()
     doneCurrent();
 }
 
-void Unit3Smooth::initializeGL()
+void Unit3MultiSample::initializeGL()
 {
     //此为Qt接口:为当前上下文初始化OpenGL函数解析
     initializeOpenGLFunctions();
+
+    //GLint buf,sbuf;
+    //glGetIntegerv(GL_SAMPLE_BUFFERS,&buf);
+    //qDebug()<<"number of sample buffers is"<<buf;
+    //glGetIntegerv(GL_SAMPLES,&sbuf);
+    //qDebug()<<"number of samples is"<<sbuf;
 
     //窗口颜色
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
-void Unit3Smooth::paintGL()
+void Unit3MultiSample::paintGL()
 {
     //清除颜色缓冲区
     glClear(GL_COLOR_BUFFER_BIT);
-    //（窗口初始化的时候貌似被多重采样设置影响了）
-    glDisable(GL_MULTISAMPLE);
 
-    if(smoothOn){
-        //开启混合
-        glEnable(GL_BLEND);
-        //混合方式
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    if(sampleOn){
+        //开启多重采样
+        //如果没有多重采样缓冲区，GL_MULTISAMPLE当作被禁止的
+        glEnable(GL_MULTISAMPLE);
 
-        //启用混合并设置混合方式后，
-        //可以调用glEnable对点、线、多边形进行抗锯齿处理
-        //对于多边形，重叠的图形需要特殊处理
-        glEnable(GL_POINT_SMOOTH);
-        //GL_POINT_SMOOTH_HINT：指定反走样点的采样质量，如果应用较大的滤波函数，
-        //GL_NICEST在光栅化期间可以生成更多的像素段。
-
-        glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
-        glEnable(GL_LINE_SMOOTH);
-        glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
-        glEnable(GL_POLYGON_SMOOTH);
-        glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+        //多重采样缓冲区默认使用片段的RGB值，不包含透明度，需要单独设置
+        //三者之一
+        //GL_SAMPLE_ALPHA_TO_COVERAGE
+        //GL_SAMPLE_ALPHA_TO_ONE
+        //GL_SAMPLE_COVERAGE
+        glEnable(GL_SAMPLE_ALPHA_TO_COVERAGE);
     }
 
     glColor3f(1.0f,1.0f,1.0f);//白色
@@ -97,11 +94,9 @@ void Unit3Smooth::paintGL()
     }
     glEnd();
 
-    if(smoothOn){
-        glDisable(GL_POINT_SMOOTH);
-        glDisable(GL_LINE_SMOOTH);
-        glDisable(GL_POLYGON_SMOOTH);
-        glDisable(GL_BLEND);
+    if(sampleOn){
+        glDisable(GL_MULTISAMPLE);
+        glDisable(GL_SAMPLE_ALPHA_TO_COVERAGE);
     }
     glLineWidth(1.0f);
     glPointSize(1.0f);
@@ -109,29 +104,29 @@ void Unit3Smooth::paintGL()
     //绘制文本
     QPainter painter(this);
     painter.setPen(QColor(255,255,255));
-    painter.drawText(20,40,"点击获取焦点后，按空格切换抗锯齿！");
-    painter.drawText(20,70,(smoothOn?"Smooth:On":"Smooth:Off"));
+    painter.drawText(20,40,"点击获取焦点后，按空格切换多重采样！");
+    painter.drawText(20,70,(sampleOn?"Sample:On":"Sample:Off"));
 }
 
-void Unit3Smooth::resizeGL(int width, int height)
+void Unit3MultiSample::resizeGL(int width, int height)
 {
     //视口，靠左下角缩放
     glViewport(0,0,width,height);
 }
 
-void Unit3Smooth::showEvent(QShowEvent *event)
+void Unit3MultiSample::showEvent(QShowEvent *event)
 {
     setFocus();
     QOpenGLWidget::showEvent(event);
 }
 
-void Unit3Smooth::keyPressEvent(QKeyEvent *event)
+void Unit3MultiSample::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
     break;
     case Qt::Key_Space:
         //切换
-        smoothOn=!smoothOn;
+        sampleOn=!sampleOn;
         break;
     default:
         break;

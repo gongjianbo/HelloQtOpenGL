@@ -5,8 +5,9 @@
 #include <QOpenGLFunctions_4_0_Compatibility>
 
 //Smooth抗锯齿，需要开启混合
-//多边形效果不太明显，可能是设置问题
-class Unit3Smooth: public QOpenGLWidget, protected QOpenGLFunctions_4_0_Compatibility
+//点和线的平滑处理得到广泛支持，但是多边形支持不好，可以采用多重采样来解决
+//（窗口初始化的时候貌似被多重采样设置影响了）
+class Unit3Smooth : public QOpenGLWidget, protected QOpenGLFunctions_4_0_Compatibility
 {
     Q_OBJECT
 public:

@@ -25,6 +25,11 @@ int main(int argc, char *argv[])
     //为什么设置之后固定管线画不出来
     QSurfaceFormat::setDefaultFormat(fmt);
 #endif
+    //为了使用多重采样，Qt还要设置setSamples
+    QSurfaceFormat fmt=QSurfaceFormat::defaultFormat();
+    //多重采样
+    fmt.setSamples(8);
+    QSurfaceFormat::setDefaultFormat(fmt);
 
     MainWindow w;
     w.show();
