@@ -6,6 +6,7 @@
 
 #include "Unit2Demo.h"
 #include "Unit3Demo.h"
+#include "Unit4Demo.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -31,6 +32,15 @@ MainWindow::MainWindow(QWidget *parent)
             currentWidget->deleteLater();
         }
         currentWidget=new Unit3Demo(this);
+        ui->verticalLayout->addWidget(currentWidget);
+    });
+    //单元选择-第4单元
+    ui->menuUnit->addAction("Unit4",[this]{
+        setWindowTitle("Unit4");
+        if(currentWidget){
+            currentWidget->deleteLater();
+        }
+        currentWidget=new Unit4Demo(this);
         ui->verticalLayout->addWidget(currentWidget);
     });
 }
