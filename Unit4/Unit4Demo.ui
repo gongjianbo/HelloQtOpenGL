@@ -32,7 +32,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_1">
       <attribute name="title">
@@ -40,14 +40,19 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="Unit4Move" name="openGLWidget"/>
+        <widget class="Unit4Move" name="moveWidget"/>
        </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
-       <string>Tab 2</string>
+       <string>模型视图投影矩阵</string>
       </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="Unit4ModelView" name="modelViewWidget"/>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>
@@ -58,6 +63,11 @@
    <class>Unit4Move</class>
    <extends>QOpenGLWidget</extends>
    <header>Unit4Move.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Unit4ModelView</class>
+   <extends>QOpenGLWidget</extends>
+   <header>Unit4ModelView.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
