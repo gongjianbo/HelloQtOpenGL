@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>614</width>
+    <height>488</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>OpenGL编程指南-第9版  龚建波的学习记录</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#centralwidget{
+background-color: white;
+}
+#centralwidget&gt;QWidget{
+background-color:white;
+border:1px solid black;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>请先选择点击【单元选择】菜单
+
+作者：龚建波1992
+QQ交流群：647637553</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>614</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuUnit">
+    <property name="title">
+     <string>单元选择</string>
+    </property>
+   </widget>
+   <addaction name="menuUnit"/>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
