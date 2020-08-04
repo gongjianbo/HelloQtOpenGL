@@ -14,6 +14,9 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
+INCLUDEPATH += $$PWD/Unit1
+include($$PWD/Unit1/Unit1.pri)
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

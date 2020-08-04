@@ -4,6 +4,8 @@
 #include <QMenu>
 #include <QAction>
 
+#include "Unit1Demo.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -12,15 +14,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     currentWidget=ui->label;
 
-    //单元选择-第2单元
-    /*ui->menuUnit->addAction("Unit2",[this]{
-        setWindowTitle("Unit2");
+    //单元选择-第1单元
+    ui->menuUnit->addAction("Unit1",[this]{
+        setWindowTitle("Unit1");
         if(currentWidget){
             currentWidget->deleteLater();
         }
-        currentWidget=new Unit2Demo(this);
+        currentWidget=new Unit1Demo(this);
         ui->verticalLayout->addWidget(currentWidget);
-    });*/
+    });
 }
 
 MainWindow::~MainWindow()
