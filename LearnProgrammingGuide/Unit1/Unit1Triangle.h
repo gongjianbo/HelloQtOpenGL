@@ -30,6 +30,8 @@ private:
     GLuint vao[1];
     //缓存对象 vbo
     GLuint buffer[1];
+    //着色器程序对象
+    GLuint shaderProgram;
 };
 
 #endif // UNIT1TRIANGLE_H

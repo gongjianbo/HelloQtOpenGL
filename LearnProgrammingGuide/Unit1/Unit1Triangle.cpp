@@ -14,6 +14,9 @@ Unit1Triangle::~Unit1Triangle()
     //准备为此小部件呈现OpenGL内容。在调用paintGL()之前会自动调用。
     makeCurrent();
 
+    //删除着色器程序对象
+    //void glDeleteProgram(GLuint program​);
+    glDeleteProgram(shaderProgram);
     //删除顶点数组对象
     //void glDeleteVertexArrays(GLsizei n​, const GLuint *arrays​);
     //参数1为数量，参数2为顶点数组 数组
@@ -43,10 +46,11 @@ void Unit1Triangle::initializeGL()
     glBindVertexArray(vao[0]);
 
     //开始绘制图形之前，我们必须先给OpenGL输入一些顶点数据
-    //两个三角，六个顶点
-    GLfloat  vertices[6][2] = {
-        { -0.90f, -0.90f }, {  0.85f, -0.90f }, { -0.90f,  0.85f },  // Triangle 1
-        {  0.90f, -0.85f }, {  0.90f,  0.90f }, { -0.85f,  0.90f }   // Triangle 2
+    //这里定义1个三角的三个顶点
+    GLfloat  vertices[3][2] = {
+        { -0.9f, -0.9f },
+        {  0.9f, -0.9f },
+        {  0.0f,  0.9f }
     };
 
     //生成缓冲区对象名称
@@ -77,10 +81,11 @@ void Unit1Triangle::initializeGL()
                            void main() {
                            gl_Position = pos;
                            })";
+    //颜色选用纯正的原谅绿
     const char *fragment_str=R"(#version 450 core
                              out vec4 outColor;
                              void main() {
-                             outColor = vec4(0.1,0.9,0.1,1.0);
+                             outColor = vec4(0.0,1.0,0.0,1.0);
                              })";
     //创建顶点着色器对象
     //GLuint glCreateShader(GLenum shaderType​);
@@ -132,7 +137,6 @@ void Unit1Triangle::initializeGL()
     //创建程序对象
     //GLuint glCreateProgram(void​);
     //glCreateProgram创建一个空的程序对象，并返回一个非零值，该值可以被引用
-    unsigned int shaderProgram;
     shaderProgram = glCreateProgram();
 
     //把之前编译的着色器附加到程序对象上
@@ -200,7 +204,10 @@ void Unit1Triangle::paintGL()
     //激活vao
     glBindVertexArray(vao[0]);
     //绘制三角
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    //void glDrawArrays(GLenum mode​, GLint first​, GLsizei count​);
+    //参数1指定要渲染的类型，如GL_TRIANGLES三角
+    //参数2起始索引，参数3呈现的索引数量
+    glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
 void Unit1Triangle::resizeGL(int width, int height)
